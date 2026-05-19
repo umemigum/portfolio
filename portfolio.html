@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>劒持遥太郎 Portfolio | Pyramid Dog Edition</title>
+  <meta name="description" content="劒持遥太郎のAI・企画 / データサイエンス向けポートフォリオ。ピラミッド犬モチーフで、生成AI活用、企画、研究、データ解析、PM/PL、自動化、創作活動を紹介。" />
+  <style>
+    :root {
+      --bg:#111319;
+      --bg2:#1a1d26;
+      --panel:rgba(255,255,255,.075);
+      --panel-strong:rgba(255,255,255,.12);
+      --text:#f8f5ef;
+      --muted:#d2c9bc;
+      --line:rgba(255,255,255,.13);
+      --sand:#e7cf9f;
+      --cream:#f8ecd0;
+      --char:#1b1b1d;
+      --pink:#ff6a8a;
+      --accent:#9fe5ff;
+      --shadow:0 24px 80px rgba(0,0,0,.35);
+      --radius:28px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(231,207,159,.18), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(159,229,255,.12), transparent 28%),
+        linear-gradient(145deg,var(--bg),var(--bg2) 56%, #171b22);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .bg-triangle{position:fixed; inset:auto; width:220px; height:190px; background:rgba(231,207,159,.08); clip-path:polygon(50% 0, 0 100%, 100% 100%); filter:blur(2px); z-index:-2; animation:drift 18s ease-in-out infinite alternate;}
+    .bg-triangle.t1{top:100px; right:6%}
+    .bg-triangle.t2{bottom:140px; left:3%; width:280px; height:230px; animation-delay:2s}
+    .bg-dot{position:fixed; border-radius:50%; filter:blur(8px); z-index:-2; opacity:.65; animation:drift 14s ease-in-out infinite alternate;}
+    .bg-dot.d1{width:180px;height:180px;background:rgba(255,106,138,.08); top:280px; left:-50px;}
+    .bg-dot.d2{width:120px;height:120px;background:rgba(159,229,255,.12); right:10%; bottom:120px; animation-delay:3s;}
+    @keyframes drift{to{transform:translate3d(26px,-24px,0) scale(1.08)}}
+    .progress{position:fixed; top:0; left:0; height:4px; width:0; background:linear-gradient(90deg,var(--sand),var(--pink),var(--accent)); z-index:100}
+    .wrap{width:min(1180px, calc(100% - 32px)); margin:0 auto}
+    header{position:sticky; top:0; z-index:50; backdrop-filter:blur(16px); background:rgba(17,19,25,.62); border-bottom:1px solid var(--line)}
+    .nav{height:74px; display:flex; align-items:center; justify-content:space-between; gap:18px}
+    .brand{display:flex; align-items:center; gap:14px; font-weight:900; letter-spacing:.02em}
+    .logo{width:46px; height:42px; position:relative; display:grid; place-items:center;}
+    .logo:before{content:""; position:absolute; inset:0; clip-path:polygon(50% 0, 0 100%, 100% 100%); background:linear-gradient(180deg,var(--cream),var(--sand)); box-shadow:0 10px 24px rgba(0,0,0,.16); border-radius:10px;}
+    .logo:after{content:"●"; position:relative; font-size:11px; color:var(--char); transform:translateY(4px)}
+    .navlinks{display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:14px}
+    .navlinks a{padding:9px 12px; border-radius:999px; transition:.2s}
+    .navlinks a:hover{background:var(--panel); color:var(--text)}
+    .btn{border:1px solid var(--line); background:var(--panel); color:var(--text); border-radius:999px; padding:11px 16px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:.22s; box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .btn:hover{transform:translateY(-2px); background:var(--panel-strong)}
+    .btn.primary{border:0; background:linear-gradient(135deg,var(--sand),#f0c46f 55%, var(--pink)); color:#231d16}
+    main{padding-bottom:56px}
+    .hero{display:grid; grid-template-columns:1.02fr .98fr; gap:28px; padding:84px 0 36px; align-items:center}
+    .eyebrow{display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border-radius:999px; background:var(--panel); border:1px solid var(--line); color:var(--muted); font-size:13px; font-weight:800; margin-bottom:20px}
+    .paw{width:10px; height:10px; border-radius:50%; background:var(--pink); box-shadow:14px -4px 0 0 rgba(255,106,138,.8), 28px 0 0 0 rgba(255,106,138,.7)}
+    h1{font-size:clamp(40px, 6vw, 78px); line-height:1.04; margin:0 0 18px; letter-spacing:-.055em}
+    .grad{background:linear-gradient(90deg,var(--cream),var(--sand),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .lead{font-size:clamp(16px,2vw,20px); line-height:1.95; color:var(--muted); margin:0; max-width:740px}
+    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px}
+    .heroCard{position:relative; border:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)); border-radius:36px; padding:26px; box-shadow:var(--shadow); overflow:hidden}
+    .heroCard:before{content:""; position:absolute; inset:auto -50px -80px auto; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(255,106,138,.20), transparent 68%);}
+    .pyramidDogStage{
+      width:100%;
+      min-height:420px;
+      border-radius:30px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(ellipse at 50% 86%, rgba(0,0,0,.20), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.035));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:28px;
+      margin-bottom:20px;
+    }
+    .dogPhoto{
+      display:block;
+      width:100%;
+      max-width:430px;
+      max-height:360px;
+      height:auto;
+      object-fit:contain;
+      border-radius:24px;
+      background:#fff;
+      box-shadow:0 18px 34px rgba(0,0,0,.16);
+    }
+
+    .dogFigure{
+      margin:0;
+      width:min(100%,430px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+    .dogCaption{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+      line-height:1.6;
+      letter-spacing:.02em;
+    }
+    @media (max-width:980px){
+      .pyramidDogStage{min-height:340px}
+      .dogFigure{width:min(100%,420px)}
+      .dogPhoto{max-width:420px; max-height:300px}
+    }
+    @media (max-width:620px){
+      .pyramidDogStage{min-height:300px; padding:18px}
+      .dogCaption{font-size:13px}
+      .dogPhoto{max-height:260px}
+    }
+
+    .heroTop{display:flex; justify-content:space-between; align-items:flex-start; gap:18px; margin-bottom:18px}
+    .badge{padding:8px 11px; border-radius:999px; background:rgba(231,207,159,.14); color:var(--cream); border:1px solid rgba(231,207,159,.25); font-size:12px; font-weight:900}
+    .mascot{display:grid; grid-template-columns:160px 1fr; gap:18px; align-items:center}
+    .mascot img{width:100%; max-width:160px; border-radius:24px; background:#fff; border:1px solid rgba(255,255,255,.22); box-shadow:0 16px 28px rgba(0,0,0,.12)}
+    .mini{color:var(--muted); font-size:14px; line-height:1.8}
+    .roles{display:grid; gap:10px; margin-top:18px}
+    .role{padding:14px 16px; border-radius:20px; background:var(--panel); border:1px solid var(--line)}
+    .role b{display:block; margin-bottom:4px}
+    .role span{color:var(--muted); font-size:13px; line-height:1.72}
+    .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:18px 0 8px}
+    .stat{position:relative; border:1px solid var(--line); background:var(--panel); border-radius:24px; padding:20px; min-height:132px; overflow:hidden}
+    .stat:before{content:""; position:absolute; right:14px; top:12px; width:54px; height:46px; clip-path:polygon(50% 0,0 100%,100% 100%); background:linear-gradient(180deg, rgba(231,207,159,.2), rgba(231,207,159,.02));}
+    .num{font-size:34px; font-weight:900; letter-spacing:-.05em}
+    .label{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.6}
+    section{padding:72px 0}
+    .sectionHead{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:24px}
+    h2{font-size:clamp(28px, 4vw, 46px); letter-spacing:-.05em; margin:0}
+    .sub{margin:8px 0 0; color:var(--muted); line-height:1.85; max-width:760px}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .card{border:1px solid var(--line); background:var(--panel); border-radius:var(--radius); padding:24px; box-shadow:0 12px 32px rgba(0,0,0,.08)}
+    .face{position:relative; overflow:hidden}
+    .face.ai{background:linear-gradient(180deg, rgba(255,106,138,.08), rgba(255,255,255,.05))}
+    .face.ds{background:linear-gradient(180deg, rgba(159,229,255,.10), rgba(255,255,255,.05))}
+    .face:after{content:""; position:absolute; right:-18px; bottom:-18px; width:86px; height:72px; clip-path:polygon(50% 0,0 100%,100% 100%); background:rgba(231,207,159,.12)}
+    .face h3{font-size:26px; margin:0 0 12px; letter-spacing:-.03em}
+    .card p{color:var(--muted); line-height:1.84; margin:0 0 18px}
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{padding:8px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.06); font-size:12px; font-weight:800}
+    .tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px}
+    .tab{border:1px solid var(--line); background:var(--panel); color:var(--muted); border-radius:999px; padding:10px 14px; font-weight:900; cursor:pointer}
+    .tab.active{color:#231d16; border-color:transparent; background:linear-gradient(135deg,var(--sand), var(--pink))}
+    .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .project{display:flex; flex-direction:column; justify-content:space-between; min-height:258px; border:1px solid var(--line); background:var(--panel); border-radius:26px; padding:22px; transition:.22s; position:relative; overflow:hidden}
+    .project:hover{transform:translateY(-5px); background:var(--panel-strong); box-shadow:var(--shadow)}
+    .project:after{content:""; position:absolute; right:-20px; bottom:-18px; width:70px; height:70px; border-radius:50%; background:rgba(231,207,159,.08)}
+    .tag{font-size:12px; color:var(--accent); font-weight:900}
+    .project h3{font-size:22px; line-height:1.35; margin:12px 0}
+    .project p{margin:0; color:var(--muted); line-height:1.78}
+    .project ul{margin:16px 0 0; padding-left:18px; color:var(--muted); line-height:1.68}
+    .skills{display:grid; grid-template-columns:1.08fr .92fr; gap:18px}
+    .bar{margin:18px 0}
+    .barTop{display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:13px; margin-bottom:8px}
+    .track{height:12px; border-radius:999px; border:1px solid var(--line); overflow:hidden; background:rgba(255,255,255,.06)}
+    .fill{height:100%; width:var(--w); border-radius:999px; background:linear-gradient(90deg,var(--sand),var(--pink),var(--accent)); transform-origin:left; animation:grow 1.15s ease both}
+    @keyframes grow{from{transform:scaleX(.06)}}
+    .quote{font-size:24px; line-height:1.72; font-weight:900; letter-spacing:-.03em}
+    .quote small{display:block; margin-top:16px; color:var(--muted); font-size:14px; font-weight:600; line-height:1.8}
+    .timeline{position:relative; display:grid; gap:14px}
+    .timeline:before{content:""; position:absolute; left:19px; top:10px; bottom:10px; width:2px; background:linear-gradient(var(--sand),var(--pink),var(--accent)); opacity:.7}
+    .item{position:relative; margin-left:48px; border:1px solid var(--line); background:var(--panel); border-radius:24px; padding:20px}
+    .item:before{content:""; position:absolute; left:-38px; top:22px; width:18px; height:16px; clip-path:polygon(50% 0,0 100%,100% 100%); background:var(--sand); box-shadow:0 0 0 6px rgba(231,207,159,.12)}
+    .date{font-size:13px; color:var(--pink); font-weight:900}
+    .item h3{margin:7px 0 8px}
+    .item p{margin:0; color:var(--muted); line-height:1.8}
+    .research{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    .paper h3{margin:0 0 10px; font-size:18px}
+    .doi{display:inline-block; margin-top:14px; color:var(--accent); font-size:13px; font-weight:900; word-break:break-all}
+    .creative{display:grid; grid-template-columns:1fr; gap:18px; align-items:stretch}
+    .creative ul{margin:14px 0 0; padding-left:18px; color:var(--muted); line-height:1.85}
+    .linkList{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:18px}
+    .linkCard{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-radius:18px; border:1px solid var(--line); background:rgba(255,255,255,.05); min-height:86px}
+    .linkCard small{display:block; color:var(--muted); margin-top:4px}
+    .cta{display:flex; align-items:center; justify-content:space-between; gap:24px; border:1px solid var(--line); background:linear-gradient(135deg, rgba(231,207,159,.18), rgba(255,106,138,.10)); border-radius:34px; padding:32px; box-shadow:var(--shadow)}
+    .cta p{margin:10px 0 0; color:var(--muted); line-height:1.82}
+    footer{padding:28px 0 56px; text-align:center; color:var(--muted); font-size:13px}
+    .reveal{opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease}
+    .reveal.show{opacity:1; transform:none}
+    @media (max-width: 980px) {
+      .hero,.grid2,.skills,.research,.creative{grid-template-columns:1fr}
+      .projects{grid-template-columns:1fr 1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .mascot{grid-template-columns:120px 1fr}
+      .cta{display:block}
+      .cta .btn{margin-top:20px}
+    }
+    @media (max-width: 720px) {
+      .linkList{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .projects{grid-template-columns:1fr}
+      .hero{padding-top:56px}
+      .wrap{width:min(100% - 22px, 1180px)}
+      .mascot{grid-template-columns:1fr}
+      .mascot img{max-width:180px}
+    }
+    @media (max-width: 520px) {
+      .stats{grid-template-columns:1fr}
+      .heroCard,.cta,.card,.project,.item{border-radius:24px}
+      h1{font-size:42px}
+    }
+    @media print {
+      header,.progress,.tabs,.btn,.bg-triangle,.bg-dot{display:none !important}
+      body{background:white; color:#111}
+      .wrap{width:100%}
+      .hero,.grid2,.skills,.research,.creative{grid-template-columns:1fr}
+      .projects{grid-template-columns:1fr 1fr}
+      .heroCard,.card,.project,.item,.cta{box-shadow:none; background:white; border:1px solid #ddd}
+      .lead,.sub,.label,.role span,.project p,.project ul,.item p,.card p,.quote small,.linkCard small{color:#333}
+      .reveal{opacity:1; transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="bg-triangle t1"></div>
+  <div class="bg-triangle t2"></div>
+  <div class="bg-dot d1"></div>
+  <div class="bg-dot d2"></div>
+
+  <header>
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="#top"><span class="logo"></span><span>Harutaro Kenmotsu</span></a>
+      <div class="navlinks">
+        <a href="#dual">Core Strengths</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#career">Career</a>
+        <a href="#creative">Creative</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero reveal">
+      <div>
+        <div class="eyebrow"><span class="paw"></span> Pyramid Dog Edition / AI Planning × Data Science</div>
+        <h1>技術を、<br><span class="grad">使われる企画</span>と<br><span class="grad">意思決定につながる分析</span>へ。</h1>
+        <p class="lead">私は、生成AIを業務に定着させる推進力と、高次元データから示唆を抽出する分析力を併せ持つ人材です。研究で培った仮説検証力、ITインフラ領域でのPM/PL経験、Pythonによる自動化経験を掛け合わせ、課題設定から実装・運用定着までを見据えて価値創出に貢献します。ポートフォリオのビジュアルテーマには、オリジナルキャラクター「ピラミッド犬」を採用しています。</p>
+        <div class="heroActions">
+          <a class="btn primary" href="#projects">実績を見る</a>
+          <a class="btn" href="#creative">創作活動を見る</a>
+        </div>
+      </div>
+      <aside class="heroCard" aria-label="Profile summary">
+        <div class="pyramidDogStage">
+          <figure class="dogFigure">
+            <img class="dogPhoto" alt="オリジナルキャラクター ピラミッド犬" src="data:image/webp;base64,UklGRgogAABXRUJQVlA4IP4fAACwPQGdASrQAtACPm02l0kkLy8oo9QImeANiWlu8YEI2pUXdFoeEr22130AOMrBrfCYn7r86Eu6Zt6gzh4LG4j53S8TL7Dm/+JdJPc4xOHYuARAighv8fQz+FwtTvlBeGj5tXONEt7z7R82rnGiW9596D4+bVzjRLe8+0fNq6CPfPhxK1iyuvSgvDUiEOpHyS8NH5xXOPfCVks4Fe0fNq5xol16cGlG7w2iW96ueI530rFw0SB9o+bXN/F5XIaPm1c40SpRUi9RPNK3vPtHzaucaJb3n2j5tXONEt8DY3zuKOJYd59qP4/dkBOJYVsNHzUclKiWVyGj5wzkNE20xWnCdtBHIaPnzWcbqvDaIBMt3htD+eD5wTDPssO8+QfS9okD7R4pBnb0+ajbGbGeZHc21fOX7mqLm6ALiucZ2unNzRFRVI5PYSjDNZgawb6fLh/Wgj/9n2QkvDR81HD1C44sHPPzvgoTCc5Aosau/wl6LSCHebu5L1cMEH0xrq0s7ZMV9OJHMVS1v30p09vHA7Ul23rBkWDGo+fNZxolvefIpJfI8+IjuhtFdQ2veGFH7OG3K5p8EBUxQ6+MoHGbdlcghzNaNcQrDRH7j54EgPMg/52kxwVs2WtsbN67ObNQFYR9ItROO6UeDX53FnlKfNYsgHNKpg3HiaxzsCNOA5OTKkfyIBmwOgDJuJ3aGVNtSnBDSBqiqGmRVkGt4vDYhH0iwuuNQVf//zo2pxf7P0L6We3Ld2OLVNoI5L71nR15IMCNOFPPVy4wl5vSK1IxjsZ+6yPxeAJFHeaT6Rs3/QOS9QL3i+YSQDf119AE2Sh4SqKn0RLJXHanZllBYGbAh0Di3LvGyP/c0lRTCC24sgJ1NxL/IBxRYLPu3Vg+gqDGxNJ+0VO4jlbg8vJSDrI7K6IA85wrObO8oe8JHmYG/lvRn2WmgbCvnB7UgCTz+XVvBZXny98BCiNVEbQ/l7SBirB/foqriY/Q656MxVJo+99MdKpZf0afDmg/0lJufDZyuPpy2NOzNOdkM6ttodRqa2EGfzaG/GVmbhc7lsukccpvlBeHoLD6XtH5tQlPNk5QDTJTWYsLoOU4IiBGhogSm7z6Lwcy+8phjH396n3yPSnaDsQ9N65YwM156OcQZU69uko2s2gM8yEc+58fNRsIAVho+bVeQI9VV6WUpcr4VVPKpvWF+klJXVfH36hDlTxHVaqC/fXmpYnzjP7d6t2k9xr67N6IkfBaXGr2Yw26xnxolvefaI/cZQFLH9uw+tFhT4srV3Yh9bU00PkGpIbZWVFzEyIs63DmaHeqJMd2LxBa3QClK1t5UycvtKXH28iTRXxRIeiW1yExmaYDyPD2cNNs2M6hqwt6yc8hdQ98+hONTRLnurRnGYF2A9nYg7URfGkCI4grsE+S4RgDBj3NxFopb4FTsTPF6o9596HcSxvSKeXgnKvSScghpL1qcMVZCzHF+3fGiHw4nOnkq+DstqpD3ePdb64KTZ8wC23GPTUGpih2BPtJmULAF0m5qubjk7tgueOMkz5qsAT/J3l0Fp9Ju4gyaV9Thx0KWXcodoOmUkgTjlyHiYp5/pOwhG+YtbkSFPKYlDYiSms7+LB0cnjZ5J1cdmN4sryDrB2Ke/snaSHKg7z7R82kZtZgvBWyUjUcReUioRZ4K93U1WNGY8VAHsPIoYAJhhoLkmAZJs68TFc2Oh3jrqvPN1ye/k2QRcc4hKZDSime8RkWVRgSePf7B2t6TLgJxROQORor+GvvN0S1BiQhcJpPqjAdNKhDqldEVFSxn3dtcNnN6y0tEt7z7CSFZTVFbIb1LZxw6JZBX5Tepu50pYPNSjWAG+rYV1BwSeBiDBQ9j7d5z8QJJejhs0mh47Ej4/4cCaYUSWPwZ5OsqVN5z26LzzrzOtDLHjdcPXl0Lxl1ZA+0fNqxC1h4YDOEkiwjznlW5SEDx1OqY3/FGMbEiXR+SasFqnaredKjmQBhzRYz7oJ6pMfFDIBV0oia+pJDqjvVtyCbh1oOGNvjrsH1yPnusH64vkEZr48NHzauNqAKD+ImSHachh6pgdrbrpZL6wn8SMR7PWhf3tslB66p7rUnPZns1eHGZny08FJvB1Rt4gAD/wPKgy8XPGatB5MAZk2flg6qrgJjiOSllFnxxDdzvlpZZ59krorS42KBeGj42gYNZHVRMMSMHzHgo1hTCuAh2gcnnlwAR11iyoQMW99lx3yvCJ9h1Z7qR2phvjtD29ft7cDv1KX9H9LUNcvLiD/w5r/E0q4BwgVqIsAJn3AzSyAMjOfz/4jxzX9P0B4aNJSQSjokjwxZrgo+bX0Y+Jrt2wt+I3Jew3dO8XaalS3ZabO3ihzR0lrWSks9//eg1fT4lVD3JxD2kKVYjLaRThIvqpC/jw80OYW4D5ygvzyi/7zVVJ5ucwMeyQyfHSZtErgfRc9ciGzq57Zfb2gDYTf+AuRogmm7KC/YR1s7/5fFrEI46H9aG0calAMuEUT77sxfm7w6L97uryC2Aa6D2mE4zVMdweRVGz1ER2LqH6iMwMIXbxlrzz1LKHPrgUNYPD2aJWFeSDA7pIeVyn5a3p2Z9KpeoBPQKNc1GpM7lrY7Fje8gOz9x4V2JunViRI45cji94yhmPdTgwCN1d5GVDbVt0/iKNXBT2Ci8Wk9x5n2JEGe3obdYaFvirsUr57BnM2dDmfNE2DtZA3fUKsREronlZYlJmxzcCifzCx3n8zWpMpFUACoDx5WOhpbdGmi684vP2KKGTXvPOAfdz4cogAtu6690maVgxXFAvDyjhi/HLk3414SLYi/wi+OVapA/6DwBx8EnKWAXFU3etG49Hvq6rqvwKq4lZ0LN0bo4Z9YTrbopuflY213RVAIQI70AdNfz/LSVNxcU7J23shuX6vNfKeg9RQ08z0BmomZatbrP8zuVDoU6bqOTLyCoXY9ZHZMockYVxfquxng9BgN6d++HcqDr5J9gf3GHfwOe08pXM4G/S0KsEzQis76CKPMNevoOhikqMuEGQETfSzQMiqznhjdKKOpd6TmwltxrxuWT/yLLwSI5Dkw6CeBduWqUHowjdOwgKOZaneR3tTd1KxhYfOdnR53LhllbEZOLatVzjRLe7c1KQvS6K0b39lJMQxfQu/B8aew4nGiW9SQbbXQEysEO8+0fNrnLBWGkgyJwMOI3oCGkTE/QEQSwFSKCnXho8TVHzaue4hXIO5aw/t1cHtMiR+0krYCCkVf3lt8oMXaPm10uhRed5+G0CHK1iFIe5flLbkjBQXiCjkQBjvPtgG2T3xefNMHqFG9rHYssXp7va3s2r1g01Md59rO2F8NoDMPWIC8+sQF59Md59rHYnNGo2F7WdsL2s7YYcId7O/Y72F9TDvX11chhAAA/vs2GoBGiBVDtYLZ0dGO2d1bJfOZBO1EgALDIF7EWAB1gANrCo5ahNdIeM5D5SKC9woWslC3PVIKbIuQWB2MgABOlH54BJysSJtt7kn1Xbv4AOZQnezmcjjD/tu+oAAto6KvOhZ/U9+SIffxAbULAtew8UZqMq/iVCBvC/Db+NhOMoHGgLpLDdsG/Y2CrOLgBe8r1hBSB1W4EU40cfMEL+ufaiLIAT/QMLP6yLIgfRIyDWZhdYK0eItThmAAQy3q5+LdBtR5xfi9jTVj1Z7S9vLO6/u6Hgq1x7hjM4KOQgc2q17u95w/HO0BCfw5Hgdl71X00jyFYJgymRrQTwmHqznNqlrMWPX8fYXyy7rvF6jSInXH15AOxVjphvfXJn4MF2+qIb8+AACrOhAUOz0Iz2Q5bIQgdvBdCfPh6rgQbcucPR3LU2Z5opoUtbuNdW+A8X8Gw7fRt2OmQPLw9bGp/bcbk0aFQL7P95uNhn/SJ+JEIBvdgZkdL4SiMMmUZOoBExCfOjQUe5ZIEar9WbopUd1y6hmBBvFmm2+WX8Hs4rG8I6SxkOY9pSZ+WkZLz8FrqpnwEd2giBbB+DhxCSkTzMK5u/thtp5136Jaxbq5LOqmGwpCiWgrX5UNgGmf/vYEfEEh6RDAPZgyEtWdK6kWrjmfzZkLJK4/vGFLcKI3flxEGgIKSH14LtC2c+Yli/atqSgRF6mrYngy4Hj0krYq3X7Ge0anzrxJyVoXgMf8cB5W6dGh4yJ2yC40CPUyVvRn7ja48mUCYmHIRtK1k+OdnD87WmMk9S9MkPR24/+StFNPw6JHlwXT+vY4ztJ55KiIwHiC+JudOo8ywc43RReQTviNkl70/G074LfoJIBdRL1cF4KDP9xMErekHzwuFXtRHYLPFhOlXnjinhkEFLxhb7uZuW30/voytfViijAW1gi1wI3KKCkHOfEz/YpnpFthmc4LP6LRyPaG0sHF/A9e39+re/OddNGruu4dWB5jt63NMp89Hw1wR80W3WBu2UKz10pkH3pGdPj8nYsSFIaKsm1JQLWNj1sUPN+tHfuF/mAMWciRaBDgsugz9g58NapQeqnwSoGEqvf5jJlmNpO+MM0EGuvbytReBX5/K6OPxA4EwAKrfjSkAyFDHztXdHz2sYMYu4InDMDPJXtPo/FzvkTI+CGNNTLutX49KMU8UFwwefU8oVxNd2pysLtZK+T6T1DnIoAp0iAS98HCSBj6T0grC7Y1+xMJkFArXROlvQHb3NquACBZf93hjlwBB7PR7trsDNlZF3PWw7enZ0LRmfqLg9bGIBZ4QbLF16/py4KnQwcMiKc1NiWc6/eywtr4fUJe4n9rnqeMuZR+m/Rb/eLBGabpVv7bwHQAu7P17K1t+5DNiY4Fpsh35kCwmrphPowV7EebAACoUWgZGphV9Sx9n6b9ZWebsqRMUoBvkjdmxFuGFZVHNDmO/bdvVynZO2v7xKkFHgZtBOfFeiNlHjH8yrNknOj3WVHj2OA20044IDDoaaY7tovb2Ycl9kAq6SdeXdQx55FAPYdkQKakoRQwgZVMjAkcErfBZcwPBtRd1Wd/Tj5QDs+KQTi0wXjipPRCECBcBeWjug4AQi1c8E63Jr/u70TFPKQSlvggAZ6PZsubrikyBrboDYDfpUUvPaNuvahvGmtAh1ZEOfLWT25lA0MT3+H4lph6YbouxbNp7jtxGgKWL7bbqeE4YLJbPu7is+rn0ImiAU3c1DQtCeYf9wlUsfXFheXO7fWT7du3IcW2v7tNslWzdZ1222NTuCsLxuFn5OZyxFd3TmAAAFN/D7nfjak2EY6bdCLaFxtcQaBnuGxe7/XeqhoZMQIfpfctWBe74J5vTdX/1S33k/pmY/D9TWkgN3OBN91eZ7EjtECcPFmWAbQNX1d1N0LcmmdGTjaLKOJ2JciiTrQPxxlcdI8Kou7fkWkDjcga1PtRcDbllqf/I/t36eUBhohaW7dhNn48xlKQLtoWBRLaEEk3EgDBaJji75bEPnO/sSa+6RrScTVn0hmBE5VnVIrqC9gFg+ZJqJy6aOe0e98u6tWdlqQUoahj76Q1e8padH0NsDbm9n7u+fy1k8olsOqtP1wViQXhn3pk5a+JvyIxajMhozK0USpkCdLoJ551YU0gR+dtrpkwcWJ9ozNX3B6Orlq9RuU9w75l6w0O0lqLeiTUQ9UKdIrsVlA1pDaWXdStUz5DRRPAwTB2wN1eiYJfpf4xcY2w3a6fB79bI3r9L+MymoTEv0Vr3sx/ZSiRB753ZlRW6Lmn+NBs1y8BMogm+r8ET3Hagtccuozb/muq3QiIod+LSE8QwnLIU+R+1AZwc1+JQjSAHXFaU7Mvfa1t9ejrirLjYz883T3ZRNikSE4y/ASd4Sl/hTHns83ICT78jOIOncVSXyIsogq6wNnC4rbnvDPpVX9Hb+1yloT+ewnb4ofQgn9LKfTT2bIXmkydrMkQZUIdKb+2Pux61m6kIDxIKqu1/afbrz5nMP1v/XIifZTHTqxC9z1mYr0fG2EsNjL7/CUoKJpNpmZDXRs4Cq/kODM65WqpU/chpiWG5xiEdQHtiitn63sFkbbUth0aGGQ78t2/0fe4YkWShnjLhFJngiF30mpcaDNWN8N67m0bUZhZ5LhQLiUNrM3KVZ+aqFMRmG4a/pfEVw7eYvMmAB4npuJe/U10BxZqhAkkXndJYZ0ALA0j3hPnEqWZX2bn+ptavbbdsq9TvTiQl4caBZzF8ZGyazWTQRamE2hBpmLl97EEQIebwPvhCL3oVETX43EwiCvq19ZZmZOdpGrDpMyY1WQm8h4kMZb5bLBhL5ucVj0cJrUieFEAi3WD02ae4wrD1gu4WJvLBMa/0xLkoVerYj4v55vxlaFgaNA/MlsZ/rEyRXS9/DoHMob6OLYUO7mqMSNFz+3V6QOf5Tx4e6ZuoW+idVmOvaQBOm01yZSZF7eKxQrElrsNMx88RPMfQ7iDN4FPZJXq6Jce6htaSpMab8eheMf/TGBvyQhbrJjbWT6GrMGJDYHqgh3lW+K/ZXjoW3CzXJNPXentpQS+VqvJG0EpOJbPL4lhnAI3oC04XyaYlX6J7RwSENhwcDgeLKfvkAR7Mtf6SCBAJuabNVG+YmeElrL9k6pjyiGgAABhlMK0ygfK2SC6E+fCWcR37MWJdASljDUiTYc+BfdcxNMHZPQ8BTecPdMz1rnBPl9WptSndHi6lDQmI6/PCjC2O99E3/hEQZ9GxBtZoG8vJy/9Iy8Z9zmE6uICYKO0r2kLmTGAF54JECuyu3VqCpJqpbKArDLFTdihKOhjIbhMKtUQ88oN9DAc88meNlIhja5vQY4FeBu/k6mwCaRqWDKLsQvS5zgKhBhLv7xvjVx5YgUX0Z8H0267WaODU54azRuPP4AVll92cpPi6NHJzwdg46BLZNzq+J7w6q4Gc0aXABJ1pt+SA+BqaTNwirtNqU8TtVdFqp+Cr/uLvOfNDXd95sjWZIRxwqRHOangD8AD+5eMo8ssVOrm498RJD0HG0gbZIEpR8linYQvGK1FMbINhwwugtycY8XAx16Wr2G/Ieb/h0ceEKcypGwVm9+KF/C10gYgnBosZNqfvw4iWf++tuT7/X6LXaB1gqEo8muE9+S+BEAbBwGpQbOBezD/xE8qEDCb7+DuJDMKVpJTi7fv/wAqZLRzFkVjztKFyQNbsoVkCayVc7OKlfbK1ePdMCCOkg1kvZkU16EuAuz9OxXe3vA7qYvYI3fx7lGskR96ehK7cDGufqht3KrpoXT2dWtBAwxCpuN2i+CRZSd1GW6j+9qXKR/USuUk8XPwUM+U0IqH8oD00HvwqpiWF2muXGy3FSuUEjvivd4dRGuptZYAC2TZIYu2riTlY6G6k6WkfsHjOri9FImrGUhpc21GoPCRGSuJYbJPln4Dpi3pDAULGQg2FQ9e2CwwX8PfU4Eovun7jl/I2tapIlI4hrEk4+CE6FkY3T8GedFGiXJLzttQ78txUhiCrXa/reP9ZKjhTrSqMzfW80oEJ9+DwZv9gNydEjx6e3beLc+fsVsfulYVW0dzqvlGIebI/IU9gczCq3NJoqc/MR1pbXrRv8mNptlQsutgfFAPqgrEzu5xmjjuAfflgE6wchhK68+DwglcWczt+mTorRtY3sh3zp/MFyaRYG2OlmllmH/d/p3FUP312HrsqKNGnVbfeUkp9Kz0jeB08Abp/9DBhPMaurdONx/0laYV/0ewLU5roW7EeEJprov38mD1Su0W9V9NJEnolmfI82kUS+KBAJHD843wQyPBqEAwi1oFziVWfX+LD1ldMLr219HTjbfTKWxfKoPBSkyNcPGKzrTRBGBySWXPGcnfJYx0SLM+bMri0seRBLUXrv/WpmbxD/2rdwNBZteeeMosxVa/jTgoJyyV0hWkRX+UCmbjsuybfrwnQv4RIIA2Ca9+j/+ySl0bE/IDAQqMXlmH5DRNbvpp1dm5/OxXFFjPO9zg+4hL1H9J/pu3KUpbV/CNbDuX8KwfeRQMtp+kZrsVteSnRI4tXCNX43CzSRtzaJbcZPRajV1FP9k350qVZmidQO4VgmcqH2DYePdBIQfu6ZdqxK+wgOKtix5aaCz95ZeH7VbtMO965HEeQ/cQXC6PbYrSOe8hGZFP4G/6oEHqUL2VYUnnEFOvANaSxZHMme57zuVfT+oCHVhr9UbshHGVyA+LrqOeHb+Z+r8vDg62W2Er+UlDjL78p7HO6Mk2Eu17/ixkYVv+opy42TcbXkqdHYeSs/FAJ4K2VlwyVSuZzRn0lfGa9GneduCSQPVRxe6c+amSd2xMMWmLxxu/d7EIcAIyQgMF+DZkJ9W+V4hMNxfKpdLXY1vG3QWXAedbq9gzW8d20u7r0DLM5ql1B0DDQ/93eWF9PvuX4yOp4e4VKzdgAM66k7QauQBpneko6U3MiDUIYXajuq3V0NysylUU4oGaC2Q6Rq4RUEDjh7Urro3iaLAyP3tKWIlum6RxbiCAYnCdFEa+bA1VFr56KcXtq9ClCBpJYnpcI2aFL1bzhBuUi+X1diq8bExD2U3J+oWGKb2iQ3xDrIUDQgalUgIrLpX9aixl0obL4xogq3vmwaQRjguhewC/oI0iUjS+fHjfO6SjB9lJ1itgsPkJ+zJrVPYRTZ8VabxOBjpjKnpoHzOdSlw42YTuk+Vjny7p3aw0A3AUwo5ofxbQ85m5I1lrBKmPXeGOBvktYEYoYR4fehiJ7G/USp+/j2bcjGv/uN3w3wJbtgXdUbJSlyEMgVLAlo2uKJtwdlaBlGGx6bmdtfRDipGr4XLmMmNPpdA9zipVqCfLDqvkCy0DMkaDppyS47sup/HBahspaMkARcvFA7kZYdDnAZ09BQiGyGLuD4WeAEVL7IEC+DEIz3xS1mimcWBP2paKCfZMsVQ2OOIrnu6MhsU2IGpQw+fKkf+kfiD5Z7uvL0pDdCi/C1069jyeUE0aWgBmBPRmtl1GSu7LvpVncXHYZomX41fOjhesiM/qpCPSJD9eeY1Es+vZfRfvwqrP2eOdDrkAoZ6+g7ExhpGICFPWDZA4tcpVjuIRFiknXD3gv69x1bhA7plX8UAJKNi6gg4Kbpb0fLmrwREij5gRm7mDMenfJ07+q4vBQzQ1/LvhLviOEvZFqM+VgSQsZN4SzImr4qlTkaZUjlZIeh0a1yCku8lI1aoIKm5y5+p0+Hz0SljzPX/CXBJ+Xt5Ui2sjWVc+592KXmJzXWTQhXUumJbZC0s+5viIppPLMwzoXasUY/FvgrXXWS7CwyugUGYu0D1Y6Aj32yyu72apQdy49Hlkr+KvtW0TgsHo1aM/bMMTQaIXGtnFEWsUetQWSHVdgoCOnfeHoU0DBxhGcssSrk7HtamejpRrimj5FXSqGRyaDmjl+irEwN5lqNX1UlJtUIi2O2BouFpKyKLdBTFOoRMqnukljU6QnwZZAZsNh4o+8Bs6YO8S0io447naY+jUUkzSkhnvpHow+65iDY1vADFyPr+P9KnbLny/Lxdk63S5fBpT8nWzVL8R73gBCNY8H5AKSeC8gKt23pXFSBBmwAw2Vo8pitiLD0eshhFFKQ5q3kENRnoDTpRdSyebGCiyS+8E/1/svAmUzrOCRRIPxlEk0NWWI1H4BouNC1kpqBI4UBPPvvLsOP9kRSMvg05TzmA+EjhqI1MRAdVLMwEKJM99fkVYqJNtnPzP25Iuh6gnePAkKA3A4XB87XcMINk/gFoXuc9ffLVOe9EVwW6a1H1guR1NyX+3K8gDWmSbvXbvTN9n58da86g25v0dQrv+3H5+ZO+o87WK3rq75jfIb+9gqAFmyniDPxNGd/QOQSPV639PZsI5ML+dZ3bGW9LePKyFRVFx0pVnU0fNCfLZwacJz3GIrNuMM85A4ZD3YaED7u0Ftx8k1Up75b2SwbBgMQW+xtHdlp3tZGqe77KpBNNg0/g59Bo5PnSE2lVLh+MKMMzpIa+QmLGiG5DUsfeVNCG8q6aqjvM89HiQw+R88PDYJrByEaTPQaCDNQinbCEuN4/q28YxmZZedRtyljBlQFYMT69tva418yb+G2CQ8jwPdJLdOwZrwo0i3J1N9+zscRRduRWK5QZ5svpvLEtBP6Y67c907n9Jn7mM91qnhil3qPdgOH+ePTaPGII0/AwkPDaTYw8Q3OOkSDHK6FGtxrlOaL53VtFkhBleCd0nOm0VSzPkNy8OwFZNrc5cOL8voo67g7HP1YrUoJ3OJpVA57sVwCcmaM2is4kdNwYSydyfGxErnX1Yp1tW2JrcHwn3N18Bw6hP64KtwO4tApTMXwNoHqcBv6a41KaXCArJNRuJ0GrVqIRNnLaom0EaOD4TbaQrjuuoVaA2UQ/3J+8SRVBJ8h5gW79gEk/TZs8noy8J9M8e2a1PKfq+IL+58JppoC3hUGSwSk0Lnn9ondgi7k07pL/GG3mVyfqHrj3iHYUQ7J4FRzzsKUs8HxHA85fiYg8xLeRGplZUbERe2mvtkCIjgUYfe1oN48xqimVqY09QPWmd1SaAZo+QVAKPNeXo4jdhLHdSbPVF5bbQ3uQNox3T+sljm92KiZYzGtjsES7AXzIT5RzPHcKnRJF2BdNZ5GEOczKGqvQYwU1Fz3M/9SfcFvC5CGbf3bLK+vDZqMarBtiZh89Dg4NsU1LPV0ifqPWCLTTwUYYXDgaypSzFrWwHS+/zTuWnVc1z22acQFSVaGAD4yEG3iNAW2lDnL6nvsSPtMZON8uIkhT45KUw63Jjt/4YQZOC7mT4cftyOYZMhvM/U6JG7sPYjP+xjd++VaO2oTDTHfTiXkwlOcj1gdtE9icADRQAAfwAEqjq1kdubYVRpUMqL0a6kwGrj59IJLF6ws32D/mA8DAPKDXPNio3FADeNV6VhhBDEpZj46OO4QAAA0jclYAAIp8gruh3AAHiAgsowA7lVOE4ybU7ALPHkAngNC1iahmagFCiRAfGVOE6w1h47bigAAAAAAA=" />
+            <figcaption class="dogCaption">オリジナルキャラクター「ピラミッド犬」</figcaption>
+          </figure>
+        </div>
+        </div>
+        <div class="profileTop">
+          <div>
+            <div class="badge">Portfolio 2026</div>
+            <h2 style="margin:14px 0 6px;font-size:32px">劒持 遥太郎</h2>
+            <p style="color:var(--muted);margin:0;line-height:1.7">AI・企画 / データサイエンス / PM・PL / Python自動化</p>
+          </div>
+        </div>
+        <div class="roles">
+          <div class="role"><b>AI・企画領域</b><span>生成AIを活用し、業務改善・新規企画・ゲーム企画を具体化。利用ルール、ユースケース、プロトタイプ、事業性まで含めて設計します。</span></div>
+          <div class="role"><b>データサイエンス領域</b><span>約60,000行×80列規模の高次元データを対象に、前処理、統計解析、可視化、特徴抽出、論文化まで一貫して実施。</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="stats reveal" aria-label="Key achievements">
+      <div class="stat"><div class="num" data-count="4">0</div><div class="label">査読付き論文<br>ファーストオーサー中心の研究実績</div></div>
+      <div class="stat"><div class="num" data-count="100">0</div><div class="label">Copilot利用率<br>自チームでの生成AI活用を推進</div></div>
+      <div class="stat"><div class="num" data-count="50">0</div><div class="label">資料作成・検証作業<br>Python自動化で工数削減</div></div>
+      <div class="stat"><div class="num" data-count="4" data-suffix="年+">0</div><div class="label">PM/PL経験<br>顧客折衝・合意形成・推進</div></div>
+    </section>
+
+    <section id="dual" class="reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Core Strengths</h2>
+          <p class="sub">採用担当者に最初に伝えたい核は、「発想だけで終わらせない企画力」と「データから根拠を作る分析力」の両立です。ピラミッド犬の見た目はかわいいけれど三角形は意外と鋭い――そんな二面性をデザインにも重ねています。</p>
+        </div>
+      </div>
+      <div class="grid2">
+        <article class="card face ai">
+          <h3>AI・企画：技術を業務価値と体験価値へ翻訳する</h3>
+          <p>Microsoft Copilot、ChatGPT、Claude、Gemini、Codexなどを活用し、情報整理、文章作成、コーディング支援、設計書作成支援へ展開しました。部署内では生成AI活用推進を担い、使い方の共有だけでなく、実務で使われる状態にするためのルール・ユースケース整備にも取り組みました。社内アイデアコンテストでは、経営者のキャリアを漫画形式で可視化する生成AI企画を提案し、社内アイデアコンテスト最終報告会へ選出。新規事業企画部署の企画案として採用されました。</p>
+          <div class="chips">
+            <span class="chip">生成AI活用推進</span>
+            <span class="chip">企画構造化</span>
+            <span class="chip">プロトタイピング</span>
+            <span class="chip">Packet Racer</span>
+            <span class="chip">ユーザー体験設計</span>
+          </div>
+        </article>
+        <article class="card face ds">
+          <h3>データサイエンス：複雑なデータから示唆を抽出する</h3>
+          <p>バイオインフォマティクス研究で、土壌由来の生物DNAデータ、分類情報、系統樹情報、土壌化学特性を統合し、Python / R / QIIME2を用いて分析しました。α/β多様性解析、群間比較、相関分析、RDA、ネットワーク解析を行い、高次元かつ疎なデータから群集構造や生物間関係に関する示唆を抽出しました。課題設定、前処理、解析、可視化、解釈、論文化まで一貫して経験しています。</p>
+          <div class="chips">
+            <span class="chip">Python / R</span>
+            <span class="chip">高次元データ</span>
+            <span class="chip">特徴抽出</span>
+            <span class="chip">統計解析</span>
+            <span class="chip">ネットワーク解析</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Selected Projects</h2>
+          <p class="sub">AI・企画、データ解析、PM/PL、自動化を成果ベースで整理しました。面接前の短時間でも強みが把握できる構成です。フィルタで見たい顔だけ呼び出せます。まるでネットナビのカスタム画面みたいに。</p>
+        </div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Project filter">
+        <button class="tab active" data-filter="all" type="button">All</button>
+        <button class="tab" data-filter="ai" type="button">AI / 企画</button>
+        <button class="tab" data-filter="ds" type="button">Data Science</button>
+        <button class="tab" data-filter="pm" type="button">PM / Automation</button>
+      </div>
+      <div class="projects">
+        <article class="project" data-cat="ai"><div><span class="tag">AI Planning</span><h3>生成AIを活用した経営者キャリア漫画化企画</h3><p>社員が経営層や会社方針に関心を持ちづらい課題に対し、生成AIと物語化を組み合わせ、理解・共感を促す企画を立案しました。</p><ul><li>社内アイデアコンテスト最終報告会へ選出</li><li>広報・採用領域への展開可能性を評価</li><li>新規事業企画部署の案として採用</li></ul></div></article>
+        <article class="project" data-cat="ai"><div><span class="tag">Game Concept</span><h3>Packet Racer</h3><p>実回線速度やレイテンシをゲーム内マシン性能に変換する、ネットワーク教育型レースゲームを自主企画しました。</p><ul><li>UIプロトタイプ / 世界観を生成AIで具体化</li><li>SWOT分析・マネタイズまで検討</li><li>ITインフラへの興味喚起を狙った体験設計</li></ul></div></article>
+        <article class="project" data-cat="ai"><div><span class="tag">AI Enablement</span><h3>設計書作成支援チャットボット</h3><p>既存設計書の構成や記載ルールを踏まえ、エンジニア向けに5W1Hの逆質問と修正理由の明示を行うチャットボットを作成しました。</p><ul><li>資料作成の属人化低減を支援</li><li>品質標準化を意識したプロンプト設計</li><li>生成AIを実務フローに接続</li></ul></div></article>
+        <article class="project" data-cat="ds"><div><span class="tag">Bioinformatics</span><h3>高次元メタゲノムデータ解析</h3><p>約60,000行×80列の存在量データと土壌化学特性を統合し、生物群集構造やネットワーク形成要因を解析しました。</p><ul><li>QIIME2 / Python / Rによる前処理・解析</li><li>RDA・相関分析・ネットワーク解析</li><li>Scientific Reports掲載</li></ul></div></article>
+        <article class="project" data-cat="ds"><div><span class="tag">Research Process</span><h3>解析プロセス比較・検証</h3><p>DADA2とDeblurによるSequence Variant抽出結果を比較し、解析前処理の正確性を検証しました。</p><ul><li>塩基配列波形分析</li><li>系統樹解析</li><li>PLOS ONE掲載</li></ul></div></article>
+        <article class="project" data-cat="pm"><div><span class="tag">Automation</span><h3>Pythonによる検証・資料作成自動化</h3><p>検証工程、週次報告、Excel・PowerPoint作成、ネットワーク機器性能試験の自動化に取り組み、作業品質と再現性を向上させました。</p><ul><li>作業時間などを約50%削減</li><li>Gitを用いたチーム開発</li><li>外部ツール制御ドライバー作成</li></ul></div></article>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <div class="sectionHead"><div><h2>Skill Architecture</h2><p class="sub">単体スキルではなく、「課題設定 → 解析 / 企画 → 実装 → 説明 → 定着」までつながるスキルセットです。</p></div></div>
+      <div class="skills">
+        <div class="card">
+          <div class="bar"><div class="barTop"><b>AI活用・企画構造化</b><span>Concept to Adoption</span></div><div class="track"><div class="fill" style="--w:92%"></div></div></div>
+          <div class="bar"><div class="barTop"><b>データ解析・仮説検証</b><span>Python / R / Statistics</span></div><div class="track"><div class="fill" style="--w:88%"></div></div></div>
+          <div class="bar"><div class="barTop"><b>PM / PL・合意形成</b><span>Stakeholder Management</span></div><div class="track"><div class="fill" style="--w:86%"></div></div></div>
+          <div class="bar"><div class="barTop"><b>Python自動化・再現性</b><span>Workflow Automation</span></div><div class="track"><div class="fill" style="--w:84%"></div></div></div>
+          <div class="bar"><div class="barTop"><b>技術をわかりやすく伝える力</b><span>Documentation / Visualization</span></div><div class="track"><div class="fill" style="--w:90%"></div></div></div>
+        </div>
+        <aside class="card">
+          <div class="quote">「データで根拠を作り、AIで形にし、PM力で実務に定着させる。」<small>研究で培った仮説検証力、エンジニアとしての実装理解、企画者としての体験設計を組み合わせ、実際に使われる成果へつなげます。</small></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="career" class="reveal">
+      <div class="sectionHead"><div><h2>Career Timeline</h2><p class="sub">ネットワークエンジニアとしての実務力を土台に、AI活用・データ処理・企画へ展開してきました。</p></div></div>
+      <div class="timeline">
+        <div class="item"><div class="date">2019 - 2022</div><h3>豊橋技術科学大学 分子遺伝学研究室</h3><p>土壌生物DNAデータを対象に、前処理、統計解析、可視化、ネットワーク解析を実施。査読付き論文4本の執筆に関与し、研究成果を国際誌へ発信。</p></div>
+        <div class="item"><div class="date">2022 - Present</div><h3>伊藤忠テクノソリューションズ株式会社 / ネットワークエンジニア</h3><p>設計・構築・運用に加え、PM/PLとして顧客折衝、要件整理、進捗管理、関係者調整を担当。複雑な技術要件を資料化・図解し、意思決定を支援。</p></div>
+        <div class="item"><div class="date">2024</div><h3>検証工程・資料作成の自動化</h3><p>PythonとGitを活用し、性能試験やレポート作成フローを自動化。手作業依存を減らし、品質・再現性・保守性を向上。</p></div>
+        <div class="item"><div class="date">2025 - 2026</div><h3>F5ソリューション領域 / 大規模案件PL</h3><p>PoC、要件定義、基本設計、詳細設計、関係チーム横断の論点整理を推進。要件定義段階から推奨案を整理し、顧客の意思決定を促進。部内評価で同等級社員内の最高評価を獲得。</p></div>
+      </div>
+    </section>
+
+    <section id="research" class="reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Research & Publications</h2>
+          <p class="sub">データサイエンス面の信頼性を支える、研究成果と論文化経験です。論文一覧や研究活動の詳細はResearchGateにも掲載しています。</p>
+        </div>
+        <a class="btn primary" href="https://www.researchgate.net/profile/Harutaro-Kenmotsu" target="_blank" rel="noreferrer">ResearchGateを見る</a>
+      </div>
+      <div class="research">
+        <article class="card paper"><h3>Distinct prokaryotic and eukaryotic communities and networks...</h3><p>農地履歴の異なる土壌を対象に、真核・原核生物群集と生物間ネットワークを解析。高次元データから群集構造と土壌化学特性の関係を抽出。</p><a class="doi" href="https://doi.org/10.1038/s41598-023-42291-y" target="_blank" rel="noreferrer">DOI: 10.1038/s41598-023-42291-y</a></article>
+        <article class="card paper"><h3>Taxonomic profiling of individual nematodes isolated from copse soils...</h3><p>線虫DNAを対象に、複数領域の18S rRNA遺伝子を用いた分類プロファイリングを実施。解析前処理と分類精度の検証に取り組む。</p><a class="doi" href="https://doi.org/10.1371/journal.pone.0240336" target="_blank" rel="noreferrer">DOI: 10.1371/journal.pone.0240336</a></article>
+      </div>
+    </section>
+
+    <section id="creative" class="reveal">
+      <div class="sectionHead">
+        <div>
+          <h2>Creative Activity</h2>
+          <p class="sub">趣味として続けている創作活動です。企画力、世界観設計、継続的なアウトプット姿勢を補足する個人活動として掲載しています。</p>
+        </div>
+      </div>
+      <div class="creative">
+        <div class="card">
+          <h3 style="margin:0 0 10px; font-size:26px; letter-spacing:-.03em">漫画・イラスト・オリジナルキャラクター制作</h3>
+          <p>漫画やイラストを制作し、オリジナルキャラクターを用いたグッズ販売も行っています。アイデアをキャラクターや世界観へ落とし込み、販売ページやLINEスタンプといった具体的なアウトプットまで展開しています。</p>
+          <ul>
+            <li>漫画・イラスト制作</li>
+            <li>オリジナルキャラクターを用いたグッズ展開</li>
+            <li>LINEスタンプなど、日常で触れてもらえる形への展開</li>
+          </ul>
+          <div class="linkList">
+            <a class="linkCard" href="https://suzuri.jp/Wata8" target="_blank" rel="noreferrer">
+              <div><b>グッズ販売</b><small>SUZURI : https://suzuri.jp/Wata8</small></div>
+              <span>↗</span>
+            </a>
+            <a class="linkCard" href="https://store.line.me/stickershop/product/20840589/ja?from=sticker" target="_blank" rel="noreferrer">
+              <div><b>スタンプ販売</b><small>LINE STORE : 20840589</small></div>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    
+
+
+
+    <section class="reveal">
+      <div class="cta">
+        <div>
+          <h2 style="margin:0; font-size:clamp(28px,4vw,40px)">AIで企画を動かし、データで意思決定を強くする。</h2>
+          <p>生成AI活用推進、新規サービス企画、データ分析、業務自動化まで。技術を実務で使われる価値へ変換する役割で貢献します。ピラミッド犬も、頭頂部を地面に突き刺し、コマのように回転するブレイクダンスをしながら賛成してくれています。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">© 2026 Harutaro Kenmotsu / Pyramid Dog Portfolio</footer>
+
+  <script>
+const progress = document.getElementById('progress');
+    const onScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${Math.max(0, Math.min(100, (scrollY / total) * 100))}%`;
+    };
+    addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.14});
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.dataset.count);
+        let current = 0;
+        const suffix = el.dataset.suffix || (target === 100 || target === 50 ? '%' : '本');
+        const step = () => {
+          current += Math.ceil(target / 34);
+          if (current >= target) {
+            el.textContent = target + suffix;
+            return;
+          }
+          el.textContent = current + suffix;
+          requestAnimationFrame(step);
+        };
+        step();
+        countObserver.unobserve(el);
+      });
+    }, {threshold:.5});
+    document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+    const tabs = document.querySelectorAll('.tab');
+    const projects = document.querySelectorAll('.project');
+    tabs[0]?.setAttribute('aria-selected','true');
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      projects.forEach(card => {
+        const show = filter === 'all' || card.dataset.cat === filter;
+        card.style.display = show ? 'flex' : 'none';
+      });
+    }));
+  </script>
+</body>
+</html>
